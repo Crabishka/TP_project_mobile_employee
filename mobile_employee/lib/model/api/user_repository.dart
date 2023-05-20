@@ -46,6 +46,7 @@ class UserRepository {
         throw Exception('Unexpected status code: ${response.statusCode}');
       }
     } catch (e) {
+      print(e.toString());
       throw e;
     }
   }
@@ -68,11 +69,8 @@ class UserRepository {
   }
 
   Future<void> regUser(String phoneNumber, String password, String name) async {
-    String? token = await TokenHelper().getUserToken();
     final response = await http.post(Uri.parse(urlForRegUser),
-        headers: token != null && token.isNotEmpty
-            ? {'Content-Type': 'application/json', 'Authorization': token}
-            : {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode(
             {"phoneNumber": phoneNumber, "password": password, "name": name}));
 

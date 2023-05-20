@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import 'order_info.dart';
+
 class ScanPage extends StatefulWidget {
   @override
   State<ScanPage> createState() => _ScanPageState();
@@ -76,7 +78,17 @@ class _ScanPageState extends State<ScanPage> {
                 ? "Номер заказа ${barcode!.code}"
                 : "Отсканируете заказ клиента")),
         if (barcode != null)
-          ElevatedButton(onPressed: () {}, child: Text("Перейти"))
+          ElevatedButton(
+              onPressed: () {
+                String number = barcode!.code!;
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => OrderInfo(code: number)),
+                );
+              },
+              child: Text("Перейти"))
       ],
     );
   }
