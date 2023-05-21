@@ -18,6 +18,7 @@ class OrderRepository {
     urlForChangeUserProduct = '$mainUrl/employee/change';
     urlForRemoveUserProduct = '$mainUrl/employee/delete';
     urlForPayOrder = '$mainUrl/employee/orders/pay';
+    urlForCancelOrder = '$mainUrl/employee/orders/cancel';
   }
 
   String mainUrl = "";
@@ -28,6 +29,7 @@ class OrderRepository {
   String urlForChangeUserProduct = "";
   String urlForRemoveUserProduct = "";
   String urlForPayOrder = "";
+  String urlForCancelOrder = "";
 
   Future<Order> getOrderById(int id) async {
     String? token = await TokenHelper().getUserToken();
@@ -152,6 +154,22 @@ class OrderRepository {
       throw ('access denied');
     }
     var url = Uri.parse('$urlForPayOrder/$id');
+    var response = await http.put(url,
+        headers: {'Content-Type': 'application/json', 'Authorization': token});
+    if (response.statusCode == 200) {
+    } else {
+      throw ('not found');
+    }
+  }
+
+  Future<void> cancel(int id) async {
+    String? token = await TokenHelper().getUserToken();
+    if (token == null ||
+        token.isEmpty ||
+        getIt.get<TokenHelper>().isTokenExpired(token)) {
+      throw ('access denied');
+    }
+    var url = Uri.parse('$urlForCancelOrder/$id');
     var response = await http.put(url,
         headers: {'Content-Type': 'application/json', 'Authorization': token});
     if (response.statusCode == 200) {

@@ -62,7 +62,9 @@ class UserRepository {
       final Map<String, dynamic> decodedJson = jsonDecode(response.body);
       JwtDTO jwtDTO = JwtDTO.fromJson(decodedJson);
       TokenHelper().setUserToken(userToken: jwtDTO.accessToken);
-    } else {}
+    } else {
+      throw ('wrong auth');
+    }
   }
 
   Future<void> regUser(String phoneNumber, String password, String name) async {
