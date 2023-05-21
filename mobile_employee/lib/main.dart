@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_employee/model/api/order_repository.dart';
+import 'package:mobile_employee/model/api/product_description_repository.dart';
 import 'package:mobile_employee/viewmodel/app_data.dart';
 import 'package:mobile_employee/viewmodel/token_helper.dart';
 import 'package:mobile_employee/viewmodel/user_model.dart';
@@ -16,6 +17,7 @@ void main() {
   getIt.registerSingleton<AppData>(AppData());
   getIt.registerSingleton<TokenHelper>(TokenHelper());
   getIt.registerSingleton<UserRepository>(UserRepository());
+  getIt.registerSingleton<ProductDescriptionRepository>(ProductDescriptionRepository());
   getIt.registerSingleton<OrderRepository>(OrderRepository());
   runApp(ChangeNotifierProvider(
     create: (context) => UserModel(),

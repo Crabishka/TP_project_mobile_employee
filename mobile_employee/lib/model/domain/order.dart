@@ -1,23 +1,23 @@
-
-
-
 import 'package:mobile_employee/model/domain/product.dart';
 
 class Order {
   final int id;
   final List<Product> products;
   final DateTime date;
+  final DateTime startTime;
+  final DateTime finishTime;
   final double sum;
   final OrderStatus status;
 
-
-
   Order(
       {required this.id,
-        required this.products,
-        required this.date,
-        required this.sum,
-        required this.status});
+      required this.products,
+      required this.date,
+      required this.sum,
+      required this.status,
+      required this.startTime,
+      required this.finishTime,
+      });
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
@@ -28,13 +28,16 @@ class Order {
         date: json['orderTime'] == null
             ? DateTime.now()
             : DateTime.parse(json['orderTime']),
+        startTime: json['startTime'] == null
+            ? DateTime.now()
+            : DateTime.parse(json['startTime']),
+        finishTime: json['finishTime'] == null
+            ? DateTime.now()
+            : DateTime.parse(json['finishTime']),
         sum: json['totalCost'].toDouble(),
         status: OrderStatus.values.firstWhere((element) =>
-        element.toString().split('.').last == json['orderStatus']));
+            element.toString().split('.').last == json['orderStatus']));
   }
-
-
-
 }
 
 enum OrderStatus {
@@ -44,8 +47,8 @@ enum OrderStatus {
   FINISHED,
   CANCELED_BY_USER,
   CANCELED_BY_EMPLOYEE,
-  CARTING
-
+  CARTING,
+  WAITING_FOR_PAYMENT
 }
 
 extension OrderStatusExtension on OrderStatus {
@@ -65,6 +68,8 @@ extension OrderStatusExtension on OrderStatus {
         return "Отменен системой";
       case OrderStatus.CARTING:
         return "Выбираются товары";
+      case OrderStatus.WAITING_FOR_PAYMENT:
+        return "Ожидает оплаты";
       default:
         return "Unknown status";
     }

@@ -77,15 +77,14 @@ class _ScanPageState extends State<ScanPage> {
             child: Text(barcode != null
                 ? "Номер заказа ${barcode!.code}"
                 : "Отсканируете заказ клиента")),
-        if (barcode != null)
+        if (barcode == null)
           ElevatedButton(
               onPressed: () {
-                String number = barcode!.code!;
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderInfo(code: number)),
+                      builder: (context) => OrderInfo(code: "5")),
                 );
               },
               child: Text("Перейти"))

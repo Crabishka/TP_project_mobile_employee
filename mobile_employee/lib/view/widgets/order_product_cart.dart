@@ -2,17 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
+import 'package:mobile_employee/model/api/order_repository.dart';
+import 'package:mobile_employee/model/domain/order.dart';
+import 'package:mobile_employee/view/custom_page_route.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/api/product_description_repository.dart';
 import '../../model/domain/product.dart';
 import '../../viewmodel/app_data.dart';
 import '../../viewmodel/user_model.dart';
+import '../qr/order_info.dart';
 
 class OrderProductCard extends StatefulWidget {
   Product product;
+  Order order;
 
-  OrderProductCard({super.key, required this.product});
+  OrderProductCard(
+      {super.key, required this.product, required Order this.order});
 
   @override
   State<OrderProductCard> createState() => _OrderProductCardState();
@@ -69,7 +75,7 @@ class _OrderProductCardState extends State<OrderProductCard> {
                   fontSize: 18,
                 ),
               ),
-              Row(
+              Column(
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -80,9 +86,7 @@ class _OrderProductCardState extends State<OrderProductCard> {
                                     top: Radius.circular(25))),
                             context: context,
                             builder: (BuildContext context) {
-                              return Container(
-                              // child: _showSelectedSizes()
-                              );
+                              return Container(child: _showSelectedSizes());
                             });
                       });
                     },
@@ -104,8 +108,18 @@ class _OrderProductCardState extends State<OrderProductCard> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-
+                        getIt.get<OrderRepository>().removeProduct(
+                            widget.order.id,
+                            widget.product.description.id,
+                            widget.product.size);
                       });
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
+                                OrderInfo(code: widget.order.id.toString())),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
@@ -134,69 +148,76 @@ class _OrderProductCardState extends State<OrderProductCard> {
 
   GetIt getIt = GetIt.instance;
 
-  // StatefulWidget _showSelectedSizes() {
-  //   return FutureBuilder(
-  //     future: getIt<ProductDescriptionRepository>().getSizeByDate(
-  //         getIt<AppData>().getDate()!, widget.product.description.id),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.waiting) {
-  //         return const Center(child: CircularProgressIndicator());
-  //       } else if (snapshot.hasError) {
-  //         return Container();
-  //       } else {
-  //         return Padding(
-  //           padding: const EdgeInsets.all(16),
-  //           child: GridView.builder(
-  //             itemCount: snapshot.data?.map.length,
-  //             itemBuilder: (context, index) {
-  //               double? key = snapshot.data?.map.keys.elementAt(index);
-  //               return InkWell(
-  //                 onTap: () {
-  //                   setState(() {
-  //                     Provider.of<UserModel>(context, listen: false)
-  //                         .changeProduct(
-  //                             widget.product.description.id,
-  //                             widget.product.size,
-  //                             snapshot.data?.map.keys.elementAt(index) ??
-  //                                 widget.product.size);
-  //                     Navigator.of(context).pop();
-  //                     ScaffoldMessenger.of(context)
-  //                         .showSnackBar(_changeSizeSnackBar());
-  //                   });
-  //                 },
-  //                 child: Container(
-  //                   decoration: BoxDecoration(
-  //                       color: snapshot.data?.map[key] as bool
-  //                           ? (snapshot.data?.map.keys.elementAt(index) ==
-  //                                   widget.product.size
-  //                               ? const Color(0xFF6831C0)
-  //                               : const Color(0xFF5FE367))
-  //                           : const Color(0xFFA89DB9),
-  //                       borderRadius:
-  //                           const BorderRadius.all(Radius.circular(10))),
-  //                   child: Center(
-  //                     child: Text(
-  //                       '$key',
-  //                       style: const TextStyle(
-  //                           fontFamily: 'PoiretOne',
-  //                           fontWeight: FontWeight.bold,
-  //                           fontSize: 24),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               );
-  //             },
-  //             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //               crossAxisCount: 4,
-  //               crossAxisSpacing: 10,
-  //               mainAxisSpacing: 10,
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
+  StatefulWidget _showSelectedSizes() {
+    return FutureBuilder(
+      future: getIt<ProductDescriptionRepository>()
+          .getSizeByDate(DateTime.now(), widget.product.description.id),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Container();
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: GridView.builder(
+              itemCount: snapshot.data?.map.length,
+              itemBuilder: (context, index) {
+                double? key = snapshot.data?.map.keys.elementAt(index);
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      getIt.get<OrderRepository>().changeSize(
+                          widget.order.id,
+                          widget.product.description.id,
+                          widget.product.size,
+                          snapshot.data?.map.keys.elementAt(index) ??
+                              widget.product.size);
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(_changeSizeSnackBar());
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
+                                OrderInfo(code: widget.order.id.toString())),
+                      );
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: snapshot.data?.map[key] as bool
+                            ? (snapshot.data?.map.keys.elementAt(index) ==
+                                    widget.product.size
+                                ? const Color(0xFF6831C0)
+                                : const Color(0xFF5FE367))
+                            : const Color(0xFFA89DB9),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
+                    child: Center(
+                      child: Text(
+                        '$key',
+                        style: const TextStyle(
+                            fontFamily: 'PoiretOne',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
 
   SnackBar _changeSizeSnackBar() {
     return SnackBar(

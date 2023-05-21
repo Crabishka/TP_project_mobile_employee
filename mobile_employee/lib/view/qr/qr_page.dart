@@ -19,14 +19,26 @@ class _QrPageState extends State<QrPage> {
           const SizedBox(
             height: 40,
           ),
-          ElevatedButton(
+          SizedBox(
+            height: 80,
+            width: 300,
+            child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ScanPage()),
                 );
               },
-              child: Text("Отсканировать"))
+              child: const Center(
+                  child: Text(
+                "Отсканировать",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'PoiretOne',
+                    fontWeight: FontWeight.bold),
+              )),
+            ),
+          )
         ],
       ),
     ));

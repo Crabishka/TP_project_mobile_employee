@@ -52,11 +52,8 @@ class UserRepository {
   }
 
   Future<void> authUser(String phoneNumber, String password) async {
-    String? token = await TokenHelper().getUserToken();
     final response = await http.post(Uri.parse(urlForAuthUser),
-        headers: token != null && token.isNotEmpty
-            ? {'Content-Type': 'application/json', 'Authorization': token}
-            : {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "username": phoneNumber,
           "password": password,
