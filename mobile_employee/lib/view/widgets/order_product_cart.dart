@@ -108,18 +108,22 @@ class _OrderProductCardState extends State<OrderProductCard> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        getIt.get<OrderRepository>().removeProduct(
-                            widget.order.id,
-                            widget.product.description.id,
-                            widget.product.size);
+                        getIt
+                            .get<OrderRepository>()
+                            .removeProduct(
+                                widget.order.id,
+                                widget.product.description.id,
+                                widget.product.size)
+                            .then((value) {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (_, __, ___) => OrderInfo(
+                                    code: widget.order.id.toString())),
+                          );
+                        });
                       });
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) =>
-                                OrderInfo(code: widget.order.id.toString())),
-                      );
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
@@ -146,6 +150,8 @@ class _OrderProductCardState extends State<OrderProductCard> {
     );
   }
 
+  void changeSize() {}
+
   GetIt getIt = GetIt.instance;
 
   StatefulWidget _showSelectedSizes() {
@@ -167,22 +173,26 @@ class _OrderProductCardState extends State<OrderProductCard> {
                 return InkWell(
                   onTap: () {
                     setState(() {
-                      getIt.get<OrderRepository>().changeSize(
-                          widget.order.id,
-                          widget.product.description.id,
-                          widget.product.size,
-                          snapshot.data?.map.keys.elementAt(index) ??
-                              widget.product.size);
-                      Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(_changeSizeSnackBar());
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) =>
-                                OrderInfo(code: widget.order.id.toString())),
-                      );
+                      getIt
+                          .get<OrderRepository>()
+                          .changeSize(
+                              widget.order.id,
+                              widget.product.description.id,
+                              widget.product.size,
+                              snapshot.data?.map.keys.elementAt(index) ??
+                                  widget.product.size)
+                          .then((value) {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(_changeSizeSnackBar());
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  OrderInfo(code: widget.order.id.toString())),
+                        );
+                      });
                     });
                   },
                   child: Container(

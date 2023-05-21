@@ -118,18 +118,18 @@ class QrPaymentPage extends StatelessWidget {
   }
 
   String formTotalPrice(Order order) {
-    return '${DateTime.now().difference(order.startTime).inMinutes * order.sum ~/ 60}';
+    return '${order.finishTime.difference(order.startTime).inMinutes * order.sum ~/ 60}';
   }
 
   String formPriceForOrder(Order order) {
-    return '${order.sum.toString()}x${DateTime.now().difference(order.startTime).inHours}:${DateTime.now().difference(order.startTime).inMinutes % 60}';
+    return '${order.sum.toString()}x${order.finishTime.difference(order.startTime).inHours}:${order.finishTime.difference(order.startTime).inMinutes % 60}';
   }
 
   String formPricePerProduct(Product product) {
-    return '${product.description.price.toString()}x${DateTime.now().difference(order.startTime).inHours}:${DateTime.now().difference(order.startTime).inMinutes % 60}';
+    return '${product.description.price.toString()}x${order.finishTime.difference(order.startTime).inHours}:${order.finishTime.difference(order.startTime).inMinutes % 60}';
   }
 
   String formTotalPricePerProduct(Product product) {
-    return '${DateTime.now().difference(order.startTime).inMinutes * product.description.price ~/ 60}';
+    return '${order.finishTime.difference(order.startTime).inMinutes * product.description.price ~/ 60}';
   }
 }

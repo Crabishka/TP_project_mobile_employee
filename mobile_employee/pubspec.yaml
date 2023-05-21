@@ -49,7 +49,7 @@ dependencies:
   firebase_core: ^2.4.1
   firebase_remote_config: ^3.0.9
   qr_code_scanner: ^1.0.1
-
+  timezone: ^0.8.0
 
 
 dev_dependencies:

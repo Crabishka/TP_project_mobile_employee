@@ -5,7 +5,8 @@ import 'package:mobile_employee/model/api/product_description_repository.dart';
 import 'package:mobile_employee/viewmodel/app_data.dart';
 import 'package:mobile_employee/viewmodel/token_helper.dart';
 import 'package:mobile_employee/viewmodel/user_model.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:provider/provider.dart';
 
 import 'app.dart';
@@ -14,6 +15,7 @@ import 'model/api/user_repository.dart';
 
 void main() {
   GetIt getIt = GetIt.instance;
+  tz.initializeTimeZones();
   getIt.registerSingleton<AppData>(AppData());
   getIt.registerSingleton<TokenHelper>(TokenHelper());
   getIt.registerSingleton<UserRepository>(UserRepository());

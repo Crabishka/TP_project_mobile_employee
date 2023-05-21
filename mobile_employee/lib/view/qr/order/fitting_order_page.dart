@@ -6,7 +6,9 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_employee/model/api/order_repository.dart';
 import 'package:mobile_employee/model/domain/order.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import '../../../app.dart';
 import '../../widgets/order_product_cart.dart';
 import '../order_info.dart';
 
@@ -25,11 +27,32 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leadingWidth: 80,
+          leading: TextButton(
+            child: const Text(
+              "Домой",
+              style: TextStyle(
+                  fontFamily: 'PoiretOne',
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              final moscowTime =
+                  tz.TZDateTime.now(tz.getLocation('Europe/Moscow'));
+              print('Current time in Moscow is $moscowTime');
+              print('Current time in Moscow is ${widget.order.startTime}');
+
+              App.changeIndex(1);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => App()));
+            },
+          ),
+          backgroundColor: const Color(0xFF2280BA),
+          toolbarHeight: 40,
+        ),
         backgroundColor: const Color(0xFFB6CFD8),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(
-            height: 40,
-          ),
           Expanded(
             child: CustomScrollView(
               slivers: [

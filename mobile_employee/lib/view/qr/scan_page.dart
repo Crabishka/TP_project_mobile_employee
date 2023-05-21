@@ -84,7 +84,7 @@ class _ScanPageState extends State<ScanPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderInfo(code: "5")),
+                      builder: (context) => OrderInfo(code: "6")),
                 );
               },
               child: Text("Перейти"))

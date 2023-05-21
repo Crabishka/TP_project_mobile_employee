@@ -60,8 +60,8 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                   ),
                 ),
                 Text(
-                  "Время аренды: ${DateTime.now().difference(widget.order.startTime).inHours}:"
-                  "${DateTime.now().difference(widget.order.startTime).inMinutes % 60}",
+                  "Время аренды: ${DateTime.now().add(const Duration(hours: 3)).difference(widget.order.startTime).inHours}:"
+                  "${DateTime.now().add(const Duration(hours: 3)).difference(widget.order.startTime).inMinutes % 60}",
                   style: const TextStyle(
                     fontFamily: 'PoiretOne',
                     fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                   ),
                 ),
                 Text(
-                  "Итого: ${DateTime.now().difference(widget.order.startTime).inMinutes * widget.order.sum ~/ 60} рублей",
+                  "Итого: ${DateTime.now().add(const Duration(hours: 3)).difference(widget.order.startTime).inMinutes * widget.order.sum ~/ 60} рублей",
                   style: const TextStyle(
                     fontFamily: 'PoiretOne',
                     fontWeight: FontWeight.bold,

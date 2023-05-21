@@ -1,4 +1,6 @@
 import 'package:mobile_employee/model/domain/product.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class Order {
   final int id;
@@ -30,7 +32,7 @@ class Order {
             : DateTime.parse(json['orderTime']),
         startTime: json['startTime'] == null
             ? DateTime.now()
-            : DateTime.parse(json['startTime']),
+            :  DateTime.parse(json['startTime']),
         finishTime: json['finishTime'] == null
             ? DateTime.now()
             : DateTime.parse(json['finishTime']),
