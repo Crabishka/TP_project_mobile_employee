@@ -123,6 +123,9 @@ class _AuthFormPageState extends State<AuthFormPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => App()));
+                                  }).catchError((_) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(_errorAuthBar());
                                   });
                                 }
                               },
@@ -142,6 +145,20 @@ class _AuthFormPageState extends State<AuthFormPage> {
                 )),
           ],
         ),
+      ),
+    );
+  }
+
+  SnackBar _errorAuthBar() {
+    return SnackBar(
+      duration: const Duration(seconds: 3),
+      content: const Text(
+          'Такой пользователь не найден или пароль не верен. Проверьте еще раз.'),
+      action: SnackBarAction(
+        label: 'Хорошо :(',
+        onPressed: () {
+          // Some code to undo the change.
+        },
       ),
     );
   }

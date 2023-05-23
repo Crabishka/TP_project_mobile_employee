@@ -10,7 +10,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import '../../../app.dart';
 import '../../widgets/order_product_cart.dart';
-import '../order_info.dart';
+import 'order_info.dart';
 
 class FittingOrderPage extends StatefulWidget {
   FittingOrderPage({super.key, required this.order});
@@ -88,9 +88,9 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
           ),
           Center(
               child: CountdownTimerWidget(
-                  countdownDuration:
-                      widget.order.startTime.difference(DateTime.now()) +
-                          const Duration(minutes: 10))),
+                  countdownDuration: widget.order.startTime.difference(
+                          DateTime.now()) +
+                      const Duration(minutes: 10))),
           Center(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -99,14 +99,12 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
                       borderRadius: BorderRadius.circular(15))),
               onPressed: () {
                 setState(() {
-                  getIt.get<OrderRepository>().finish(widget.order.id);
+                  getIt.get<OrderRepository>().cancel(widget.order.id);
                 });
-                Navigator.pop(context);
+                App.changeIndex(1);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          OrderInfo(code: widget.order.id.toString())),
+                  MaterialPageRoute(builder: (context) => App()),
                 );
               },
               child: const Text("Отменить",
@@ -122,16 +120,7 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
   }
 }
 
-class ButtonState with ChangeNotifier {
-  bool _isEnabled = true;
 
-  bool get isEnabled => _isEnabled;
-
-  void disableButton() {
-    _isEnabled = false;
-    notifyListeners();
-  }
-}
 
 class CountdownTimerWidget extends StatefulWidget {
   final Duration countdownDuration;
@@ -150,7 +139,7 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget> {
   void initState() {
     super.initState();
     remainingTime = widget.countdownDuration;
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted) {
         setState(() {
           remainingTime = Duration(seconds: remainingTime.inSeconds - 1);

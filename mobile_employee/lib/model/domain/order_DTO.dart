@@ -10,7 +10,7 @@ class OrderDTO {
 
   factory OrderDTO.fromJson(Map<String, dynamic> json) {
     return OrderDTO(
-      order: Order.fromJson(json['order']),
+      order: Order.fromJson(json['activeOrder']),
       phoneNumber: json['phoneNumber'],
       name: json['name'],
     );
