@@ -7,7 +7,7 @@ import 'package:mobile_employee/model/domain/order.dart';
 import 'package:mobile_employee/view/qr/order/fitting_order_page.dart';
 
 import '../../widgets/product_little_card.dart';
-import '../order_info.dart';
+import 'order_info.dart';
 
 class WaitingOrderPage extends StatefulWidget {
   WaitingOrderPage({super.key, required this.order});

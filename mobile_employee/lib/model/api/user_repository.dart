@@ -37,7 +37,7 @@ class UserRepository {
         'Authorization': token
       });
       if (response.statusCode == 200) {
-        final Map<String, dynamic> decodedJson = jsonDecode(response.body);
+        final Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
         User user = User.fromJson(decodedJson);
         return user;
       } else if (response.statusCode == 403) {
@@ -59,7 +59,7 @@ class UserRepository {
           "password": password,
         }));
     if (response.statusCode == 200) {
-      final Map<String, dynamic> decodedJson = jsonDecode(response.body);
+      final Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       JwtDTO jwtDTO = JwtDTO.fromJson(decodedJson);
       TokenHelper().setUserToken(userToken: jwtDTO.accessToken);
     } else {

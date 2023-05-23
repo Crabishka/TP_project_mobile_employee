@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'order_info.dart';
+import 'order/order_info.dart';
 
 class ScanPage extends StatefulWidget {
   @override

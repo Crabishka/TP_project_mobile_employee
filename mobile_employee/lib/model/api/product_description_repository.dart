@@ -34,7 +34,7 @@ class ProductDescriptionRepository {
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
+      var jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
       List<ProductDescription> productList = [];
 

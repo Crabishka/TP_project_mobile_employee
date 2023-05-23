@@ -11,7 +11,7 @@ import '../../model/api/product_description_repository.dart';
 import '../../model/domain/product.dart';
 import '../../viewmodel/app_data.dart';
 import '../../viewmodel/user_model.dart';
-import '../qr/order_info.dart';
+import '../qr/order/order_info.dart';
 
 class OrderProductCard extends StatefulWidget {
   Product product;

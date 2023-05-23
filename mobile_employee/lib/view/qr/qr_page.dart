@@ -13,6 +13,7 @@ class _QrPageState extends State<QrPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFFB6CFD8),
         body: Center(
       child: Column(
         children: [

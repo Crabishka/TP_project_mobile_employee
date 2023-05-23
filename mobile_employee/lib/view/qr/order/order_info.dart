@@ -4,11 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:mobile_employee/model/api/order_repository.dart';
 import 'package:mobile_employee/view/qr/order/qr_payment_page.dart';
 
-import '../../model/domain/order.dart';
+import '../../../model/domain/order.dart';
 
-import 'order/active_order_page.dart';
-import 'order/fitting_order_page.dart';
-import 'order/waiting_order_page.dart';
+import 'active_order_page.dart';
+import 'fitting_order_page.dart';
+import 'waiting_order_page.dart';
 
 class OrderInfo extends StatefulWidget {
   OrderInfo({super.key, required String this.code});

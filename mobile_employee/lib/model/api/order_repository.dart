@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../viewmodel/app_data.dart';
 import '../../viewmodel/token_helper.dart';
 import '../domain/order.dart';
+import '../domain/order_DTO.dart';
 
 class OrderRepository {
   GetIt getIt = GetIt.instance;
@@ -14,7 +15,7 @@ class OrderRepository {
     urlForGetUserOrder = "$mainUrl/employee/orders";
     urlForApproveOrder = "$mainUrl/employee/orders/approve";
     urlForFinishOrder = "$mainUrl/employee/orders/finish";
-    urlForGetLastOrders = "$mainUrl/employee/orders";
+    urlForGetLastOrders = "$mainUrl/employee/last_orders";
     urlForChangeUserProduct = '$mainUrl/employee/change';
     urlForRemoveUserProduct = '$mainUrl/employee/delete';
     urlForPayOrder = '$mainUrl/employee/orders/pay';
@@ -82,7 +83,7 @@ class OrderRepository {
     }
   }
 
-  Future<List<Order>> getLastOrders() async {
+  Future<List<OrderDTO>> getLastOrders() async {
     String? token = await TokenHelper().getUserToken();
     if (token == null ||
         token.isEmpty ||
@@ -90,19 +91,18 @@ class OrderRepository {
       throw ('access denied');
     }
     var baseUrl = Uri.parse(urlForGetLastOrders);
-    var response = await http.get(baseUrl,
+    var response = await http.post(baseUrl,
         headers: {'Content-Type': 'application/json', 'Authorization': token});
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);
-      List<Order> orderList = [];
+      List<OrderDTO> orderList = [];
       for (var item in jsonData) {
-        var product = Order.fromJson(item);
+        var product = OrderDTO.fromJson(item);
         orderList.add(product);
       }
       return orderList;
     } else {
       return [];
-      throw ('not found');
     }
   }
 
