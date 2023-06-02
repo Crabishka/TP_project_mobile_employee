@@ -43,14 +43,14 @@ class Order {
 }
 
 enum OrderStatus {
-  ACTIVE,
-  FITTING,
+  CARTING,
   WAITING_FOR_RECEIVING,
+  FITTING,
+  ACTIVE,
+  WAITING_FOR_PAYMENT,
   FINISHED,
   CANCELED_BY_USER,
   CANCELED_BY_EMPLOYEE,
-  CARTING,
-  WAITING_FOR_PAYMENT
 }
 
 extension OrderStatusExtension on OrderStatus {

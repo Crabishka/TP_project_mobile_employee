@@ -13,35 +13,47 @@ class _QrPageState extends State<QrPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFB6CFD8),
-        body: Center(
-      child: Column(
+      body: Column(
         children: [
           const SizedBox(
             height: 40,
           ),
-          SizedBox(
-            height: 80,
-            width: 300,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ScanPage()),
-                );
-              },
-              child: const Center(
-                  child: Text(
-                "Отсканировать",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'PoiretOne',
-                    fontWeight: FontWeight.bold),
-              )),
+          Spacer(),
+          Center(
+            child: SizedBox(
+              height: 250,
+              width: 250,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    backgroundColor: const Color(0xFF3EB489)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ScanPage()),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    const Icon(Icons.qr_code_scanner, size: 150),
+                    const Text(
+                      "Отсканировать",
+                      style: TextStyle(
+                          fontFamily: 'PoiretOne',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26),
+                    ),
+                    Expanded(child: Container()),
+                  ],
+                ),
+              ),
             ),
-          )
+          ),
+          Spacer(),
         ],
       ),
-    ));
+    );
   }
 }
