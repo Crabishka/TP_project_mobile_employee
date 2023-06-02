@@ -6,13 +6,15 @@ import 'package:mobile_employee/model/api/order_repository.dart';
 import 'package:mobile_employee/model/domain/order.dart';
 import 'package:mobile_employee/view/qr/order/fitting_order_page.dart';
 
+import '../../../model/domain/order_DTO.dart';
 import '../../widgets/product_little_card.dart';
+import '../../widgets/progress_order_bar.dart';
 import 'order_info.dart';
 
 class WaitingOrderPage extends StatefulWidget {
-  WaitingOrderPage({super.key, required this.order});
+  WaitingOrderPage({super.key, required this.orderDTO});
 
-  Order order;
+  OrderDTO orderDTO;
 
   @override
   State<WaitingOrderPage> createState() => _WaitingOrderPageState();
@@ -30,25 +32,76 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
           Expanded(
             child: CustomScrollView(
               slivers: [
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 8,
+                  ),
+                ),
                 SliverToBoxAdapter(
-                  child: Text(
-                    "Заказ на ${DateFormat('dd-MMM').format(widget.order.date)}",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: isToday() ? Colors.black : Colors.red,
-                        fontFamily: 'PoiretOne',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                  child: Center(
+                    child: Text(
+                      "Заказ клиента № ${widget.orderDTO.order.id}",
+                      style: const TextStyle(
+                          fontFamily: 'PoiretOne',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32),
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 16,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                    child: ProgressOrderBar(order: widget.orderDTO.order)),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 16,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Заказ от ${DateFormat('dd-MMM').format(widget.orderDTO.order.date)} числа",
+                          style: const TextStyle(
+                              color: Color(0xAA000000),
+                              fontFamily: 'PoiretOne',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                        Text(
+                          "Имя: ${widget.orderDTO.name}",
+                          style: const TextStyle(
+                              color: Color(0xAA000000),
+                              fontFamily: 'PoiretOne',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                        Text(
+                          "Телефон: ${widget.orderDTO.phoneNumber}",
+                          style: const TextStyle(
+                              color: Color(0xAA000000),
+                              fontFamily: 'PoiretOne',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      childCount: widget.order.products.length,
+                      childCount: widget.orderDTO.order.products.length,
                       (context, index) {
                     return Padding(
                         padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                         child: ProductLittleCard(
-                          product: widget.order.products[index],
+                          product: widget.orderDTO.order.products[index],
                         ));
                   }),
                 ),
@@ -58,20 +111,22 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
           Center(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                  backgroundColor: isToday()
+                      ? const Color(0xFF3EB489)
+                      : const Color(0xFFb43e69),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15))),
+                      borderRadius: BorderRadius.circular(4))),
               onPressed: isToday()
                   ? () {
                       setState(() {
                         waitAccept();
-
                       });
                     }
                   : null,
               child: Text(
                   isToday() ? "Подтвердить" : "Заказ не на сегодняшную дату :(",
-                  style: TextStyle(
-                    color: isToday() ? Colors.cyanAccent : Colors.red,
+                  style: const TextStyle(
+                    color: Colors.white,
                     fontFamily: 'PoiretOne',
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -84,20 +139,25 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
   }
 
   Future<void> waitAccept() async {
-    getIt.get<OrderRepository>().approve(widget.order.id);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              FittingOrderPage(order: widget.order)),
-    );
+    getIt
+        .get<OrderRepository>()
+        .approve(widget.orderDTO.order.id)
+        .then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => OrderInfo(
+                  code: widget.orderDTO.order.id.toString(),
+                )),
+      );
+    });
   }
 
   bool isToday() {
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
-    DateTime orderDate = DateTime(
-        widget.order.date.year, widget.order.date.month, widget.order.date.day);
+    DateTime orderDate = DateTime(widget.orderDTO.order.date.year,
+        widget.orderDTO.order.date.month, widget.orderDTO.order.date.day);
     return orderDate == today;
   }
 }

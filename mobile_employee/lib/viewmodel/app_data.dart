@@ -1,5 +1,5 @@
 class AppData {
-  String url = "http://188.225.35.245:8080";
+  String url = "https://1469629-cm31020.tw1.ru";
 
   String getUrl() {
     return url;

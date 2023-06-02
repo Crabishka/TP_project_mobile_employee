@@ -20,6 +20,7 @@ class OrderRepository {
     urlForRemoveUserProduct = '$mainUrl/employee/delete';
     urlForPayOrder = '$mainUrl/employee/orders/pay';
     urlForCancelOrder = '$mainUrl/employee/orders/cancel';
+    urlForFindOrderByNumber = '$mainUrl/orders/number';
   }
 
   String mainUrl = "";
@@ -31,8 +32,9 @@ class OrderRepository {
   String urlForRemoveUserProduct = "";
   String urlForPayOrder = "";
   String urlForCancelOrder = "";
+  String urlForFindOrderByNumber = "";
 
-  Future<Order> getOrderById(int id) async {
+  Future<OrderDTO> getOrderById(int id) async {
     String? token = await TokenHelper().getUserToken();
     if (token == null ||
         token.isEmpty ||
@@ -43,8 +45,9 @@ class OrderRepository {
     var response = await http.get(url,
         headers: {'Content-Type': 'application/json', 'Authorization': token});
     if (response.statusCode == 200) {
-      final Map<String, dynamic> decodedJson = jsonDecode(response.body);
-      Order order = Order.fromJson(decodedJson);
+
+      var jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+      OrderDTO order = OrderDTO.fromJson(jsonData);
       return order;
     } else {
       throw ('not found');
@@ -94,7 +97,7 @@ class OrderRepository {
     var response = await http.post(baseUrl,
         headers: {'Content-Type': 'application/json', 'Authorization': token});
     if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
+      var jsonData = jsonDecode(utf8.decode(response.bodyBytes));
       List<OrderDTO> orderList = [];
       for (var item in jsonData) {
         var product = OrderDTO.fromJson(item);
@@ -175,6 +178,27 @@ class OrderRepository {
     if (response.statusCode == 200) {
     } else {
       throw ('not found');
+    }
+  }
+
+  Future<List<OrderDTO>> findOrderByNumber(String phoneNumber) async {
+    String? token = await TokenHelper().getUserToken();
+    if (token == null ||
+        token.isEmpty ||
+        getIt.get<TokenHelper>().isTokenExpired(token)) {
+      throw ('access denied');
+    }
+    var url = Uri.parse('$urlForFindOrderByNumber/$phoneNumber');
+    var response = await http.get(url,
+        headers: {'Content-Type': 'application/json', 'Authorization': token});
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+      List<OrderDTO> orderList = [];
+      var product = OrderDTO.fromJson(jsonData);
+      orderList.add(product);
+      return orderList;
+    } else {
+      return [];
     }
   }
 }

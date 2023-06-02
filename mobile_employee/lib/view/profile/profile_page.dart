@@ -18,11 +18,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   GetIt getIt = GetIt.instance;
+  late Future<User> data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = getIt<UserRepository>().getUser();
+  }
+
+  Future<void> fetchData() async {
+    var newUser = await getIt<UserRepository>().getUser();
+    setState(() {
+      data = Future.value(newUser);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB6CFD8),
       appBar: AppBar(
         leadingWidth: 80,
         leading: TextButton(
@@ -42,49 +55,81 @@ class _ProfilePageState extends State<ProfilePage> {
                 context, MaterialPageRoute(builder: (context) => App()));
           },
         ),
-        backgroundColor: const Color(0xFF2280BA),
+        backgroundColor: const Color(0xFF3EB489),
         toolbarHeight: 40,
       ),
-      body: FutureBuilder<User>(
-        future: Provider.of<UserModel>(context).getUser(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            if (snapshot.data == null) {
-              return Container(
-                color: const Color(0xFF2280BA),
-              );
-            }
-            return CustomScrollView(
-              scrollDirection: Axis.vertical,
-              slivers: [
-                SliverToBoxAdapter(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await fetchData();
+        },
+        child: FutureBuilder<User>(
+          future: data,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              if (snapshot.data == null) {
+                return Container(
+                  color: const Color(0xFF2280BA),
+                );
+              }
+              return CustomScrollView(
+                scrollDirection: Axis.vertical,
+                slivers: [
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 20,
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Image.asset(
+                      "./assets/images/ball.png",
+                      color: const Color(0xFF3EB489),
+                      height: 80,
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                      child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                          child: Center(
+                            child: Text("Здравствуйте, ${snapshot.data!.name}",
+                                style: const TextStyle(
+                                  fontFamily: 'PoiretOne',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                )),
+                          ))),
+                  SliverToBoxAdapter(
+                      child: Center(
                     child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
-                        child: Text("Здравствуйте, ${snapshot.data!.name}",
-                            style: const TextStyle(
-                              color: Color(0xFF3C2C9E),
-                              fontFamily: 'PoiretOne',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            )))),
-                SliverToBoxAdapter(
-                    child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          "Ваш номер ${snapshot.data!.phoneNumber}",
+                          snapshot.data!.phoneNumber,
                           style: const TextStyle(
-                            color: Color(0xFF3C2C9E),
                             fontFamily: 'PoiretOne',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
-                        ))),
-              ],
-            );
-          }
-        },
+                        )),
+                  )),
+                  const SliverToBoxAdapter(
+                      child: Center(
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        child: Text(
+                          "Аккаунт Работника",
+                          style: TextStyle(
+                            fontFamily: 'PoiretOne',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        )),
+                  )),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }
