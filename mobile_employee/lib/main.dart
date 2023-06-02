@@ -12,14 +12,14 @@ import 'package:provider/provider.dart';
 import 'app.dart';
 import 'model/api/user_repository.dart';
 
-
 void main() {
   GetIt getIt = GetIt.instance;
   tz.initializeTimeZones();
   getIt.registerSingleton<AppData>(AppData());
   getIt.registerSingleton<TokenHelper>(TokenHelper());
   getIt.registerSingleton<UserRepository>(UserRepository());
-  getIt.registerSingleton<ProductDescriptionRepository>(ProductDescriptionRepository());
+  getIt.registerSingleton<ProductDescriptionRepository>(
+      ProductDescriptionRepository());
   getIt.registerSingleton<OrderRepository>(OrderRepository());
   runApp(ChangeNotifierProvider(
     create: (context) => UserModel(),

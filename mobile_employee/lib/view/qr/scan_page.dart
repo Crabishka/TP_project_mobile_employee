@@ -36,6 +36,7 @@ class _ScanPageState extends State<ScanPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('QR Code Scanner'),
+          backgroundColor: const Color(0xFF3EB489),
         ),
         body: Center(
           child: Stack(
@@ -73,21 +74,48 @@ class _ScanPageState extends State<ScanPage> {
     return Column(
       children: [
         Container(
-            decoration: const BoxDecoration(color: Colors.white),
-            child: Text(barcode != null
-                ? "Номер заказа ${barcode!.code}"
-                : "Отсканируете заказ клиента")),
+            decoration: BoxDecoration(
+                color: Color(0xFFb43e69),
+                borderRadius: BorderRadius.circular(4)),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                  barcode != null
+                      ? " Номер заказа ${barcode!.code} "
+                      : " Отсканируете заказ клиента ",
+                  style: const TextStyle(
+                      fontFamily: 'PoiretOne',
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24)),
+            )),
+        const SizedBox(
+          height: 8,
+        ),
         if (barcode != null)
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => OrderInfo(code: barcode!.code!)),
-                );
-              },
-              child: Text("Перейти"))
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => OrderInfo(code: barcode!.code!)),
+              );
+            },
+            child: Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xFF3EB489),
+                    borderRadius: BorderRadius.circular(4)),
+                child: const Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Text(" Перейти ",
+                      style: TextStyle(
+                          fontFamily: 'PoiretOne',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24)),
+                )),
+          )
       ],
     );
   }

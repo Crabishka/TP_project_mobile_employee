@@ -6,6 +6,7 @@ import 'package:mobile_employee/view/qr/order/qr_payment_page.dart';
 
 import '../../../model/domain/order.dart';
 
+import '../../../model/domain/order_DTO.dart';
 import 'active_order_page.dart';
 import 'fitting_order_page.dart';
 import 'waiting_order_page.dart';
@@ -21,7 +22,7 @@ class OrderInfo extends StatefulWidget {
 
 class _OrderInfoState extends State<OrderInfo> {
   GetIt getIt = GetIt.instance;
-  late Future<Order> order;
+  late Future<OrderDTO> order;
 
   Future<void> fetchData() async {
     var newOrder =
@@ -32,7 +33,7 @@ class _OrderInfoState extends State<OrderInfo> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     order = getIt.get<OrderRepository>().getOrderById(int.parse(widget.code));
   }
@@ -44,25 +45,24 @@ class _OrderInfoState extends State<OrderInfo> {
       onRefresh: () async {
         fetchData();
       },
-      child: FutureBuilder<Order>(
+      child: FutureBuilder<OrderDTO>(
         future: order,
-        builder: (BuildContext context, AsyncSnapshot<Order> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              backgroundColor: const Color(0xFFB6CFD8),
-              body: Center(child: CircularProgressIndicator()),
-            );
+        builder: (BuildContext context, AsyncSnapshot<OrderDTO> snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
           } else if (snapshot.data == null) {
-            return const Center(child: Text("Заказ пуст"));
-          } else if (snapshot.data!.status ==
+            return const Center(child: Text("Заказ пуст или доступ запрещен"));
+          } else if (snapshot.data!.order.status ==
               OrderStatus.WAITING_FOR_RECEIVING) {
-            return WaitingOrderPage(order: snapshot.data!);
-          } else if (snapshot.data!.status == OrderStatus.ACTIVE) {
-            return ActiveOrderPage(order: snapshot.data!);
-          } else if (snapshot.data!.status == OrderStatus.FITTING) {
-            return FittingOrderPage(order: snapshot.data!);
-          } else if (snapshot.data!.status == OrderStatus.WAITING_FOR_PAYMENT) {
-            return QrPaymentPage(order: snapshot.data!);
+            return WaitingOrderPage(orderDTO: snapshot.data!);
+          } else if (snapshot.data!.order.status == OrderStatus.ACTIVE) {
+            return ActiveOrderPage(orderDTO: snapshot.data!);
+          } else if (snapshot.data!.order.status == OrderStatus.FITTING) {
+            return FittingOrderPage(orderDTO: snapshot.data!);
+          } else if (snapshot.data!.order.status ==
+                  OrderStatus.WAITING_FOR_PAYMENT ||
+              snapshot.data!.order.status == OrderStatus.FINISHED) {
+            return QrPaymentPage(orderDTO: snapshot.data!);
           } else {
             return const Center(
               child: Text("Такого заказа не найдено"),
