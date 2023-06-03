@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="57c614a7-c798-4542-bed2-a50a9e4b352d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/active_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/active_order_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/qr_payment_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/qr_payment_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/waiting_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobile_employee/lib/view/qr/order/waiting_order_page.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QeItJ18E6HtRES5pdiQ3xGAP7i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/JohnyTwoJacket/StudioProjects/TP_project_mobile_employee/mobile_employee/fonts&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;flutter.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee\fonts" />
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee\android\app\src\main\res\mipmap-xxxhdpi" />
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee\android\app\src\main\res\mipmap-xxhdpi" />
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee\android\app\src\main\res\mipmap-xhdpi" />
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee\android\app\src\main\res\mipmap-mdpi" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JohnyTwoJacket\StudioProjects\TP_project_mobile_employee\mobile_employee" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/mobile_employee/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="57c614a7-c798-4542-bed2-a50a9e4b352d" name="Changes" comment="" />
+      <created>1685707833623</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685707833623</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="dart-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

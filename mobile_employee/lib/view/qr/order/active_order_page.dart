@@ -7,6 +7,7 @@ import 'package:mobile_employee/view/qr/order/order_info.dart';
 import 'package:mobile_employee/view/qr/order/qr_payment_page.dart';
 import 'package:mobile_employee/view/widgets/progress_order_bar.dart';
 
+import '../../../app.dart';
 import '../../../model/api/order_repository.dart';
 import '../../../model/domain/order_DTO.dart';
 import '../../widgets/order_product_cart.dart';
@@ -27,6 +28,25 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leadingWidth: 80,
+          leading: TextButton(
+            child: const Text(
+              "Домой",
+              style: TextStyle(
+
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              App.changeIndex(1);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => App()));
+            },
+          ),
+          backgroundColor: const Color(0xFF3EB489),
+          toolbarHeight: 40,
+        ),
         body: SafeArea(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(

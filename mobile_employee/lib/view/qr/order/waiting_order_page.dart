@@ -6,6 +6,7 @@ import 'package:mobile_employee/model/api/order_repository.dart';
 import 'package:mobile_employee/model/domain/order.dart';
 import 'package:mobile_employee/view/qr/order/fitting_order_page.dart';
 
+import '../../../app.dart';
 import '../../../model/domain/order_DTO.dart';
 import '../../widgets/product_little_card.dart';
 import '../../widgets/progress_order_bar.dart';
@@ -26,6 +27,25 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leadingWidth: 80,
+          leading: TextButton(
+            child: const Text(
+              "Домой",
+              style: TextStyle(
+
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              App.changeIndex(1);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => App()));
+            },
+          ),
+          backgroundColor: const Color(0xFF3EB489),
+          toolbarHeight: 40,
+        ),
         body: SafeArea(
       child: Column(
         children: [

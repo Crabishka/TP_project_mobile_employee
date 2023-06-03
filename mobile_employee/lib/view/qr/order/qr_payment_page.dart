@@ -26,6 +26,25 @@ class _QrPaymentPageState extends State<QrPaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 80,
+        leading: TextButton(
+          child: const Text(
+            "Домой",
+            style: TextStyle(
+
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+          onPressed: () {
+            App.changeIndex(1);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => App()));
+          },
+        ),
+        backgroundColor: const Color(0xFF3EB489),
+        toolbarHeight: 40,
+      ),
       body: SafeArea(
         child: Column(
           children: [
