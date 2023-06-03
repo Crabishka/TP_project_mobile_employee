@@ -33,6 +33,9 @@ class _OrderListPageState extends State<OrderListPage> {
   }
 
   Future<void> searchByPhone(String phoneNumber) async {
+    if (phoneNumber.startsWith("+7")) {
+      phoneNumber = phoneNumber.replaceAll("+7", "8");
+    }
     var orderList =
         await getIt<OrderRepository>().findOrderByNumber(phoneNumber);
     setState(() {
@@ -58,10 +61,7 @@ class _OrderListPageState extends State<OrderListPage> {
                       child: Text(
                     'Доступ запрещен. Войдите с аккаунта работника.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'PoiretOne',
-                        fontSize: 32),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
                   ));
                 } else {
                   return const Center(child: CircularProgressIndicator());
@@ -81,10 +81,8 @@ class _OrderListPageState extends State<OrderListPage> {
                               child: Form(
                                   key: _formKey,
                                   child: TextFormField(
-
                                       decoration: const InputDecoration(
                                           labelStyle: TextStyle(
-                                              fontFamily: 'PoiretOne',
                                               color: Color(0xFF3EB489),
                                               fontSize: 20),
                                           labelText: 'Телефон',

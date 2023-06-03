@@ -69,6 +69,9 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   fonts:
+    - family: Mont
+      fonts:
+        - asset: fonts/montserrat/Montserrat-Light.ttf
     - family: PoiretOne
       fonts:
         - asset: fonts/PoiretOne-Regular.ttf

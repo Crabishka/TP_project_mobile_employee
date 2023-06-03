@@ -61,17 +61,18 @@ class _OrderProductCardState extends State<OrderProductCard> {
                           flex: 6,
                           child: Text(
                             widget.product.description.title,
-                            maxLines: 1,
+                            maxLines: 2,
                             style: const TextStyle(
-                              fontFamily: 'PoiretOne',
+
                               overflow: TextOverflow.ellipsis,
                               fontWeight: FontWeight.bold,
-                              fontSize: 32,
+                              fontSize: 16,
                             ),
                           ),
                         ),
                         Expanded(
                           child: IconButton(
+                            alignment: Alignment.topCenter,
                               onPressed: () {
                                 setState(() {
                                   getIt
@@ -91,9 +92,17 @@ class _OrderProductCardState extends State<OrderProductCard> {
                                   });
                                 });
                               },
-                              icon: const Icon(Icons.cancel_outlined)),
+                              icon: const Icon(Icons.cancel_outlined, size: 24,)),
                         )
                       ],
+                    ),
+                  ),
+                  Text(
+                    '${widget.product.description.price.truncate().toString()} руб/ч',
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+
+                      fontSize: 16,
                     ),
                   ),
                   Row(
@@ -104,8 +113,8 @@ class _OrderProductCardState extends State<OrderProductCard> {
                         'Размер: ',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: 'PoiretOne',
-                          fontSize: 24,
+
+                          fontSize: 16,
                         ),
                       ),
                       // if (getIt.get<AppData>().isChange)
@@ -122,25 +131,17 @@ class _OrderProductCardState extends State<OrderProductCard> {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.black,
-                                fontFamily: 'PoiretOne',
-                                fontSize: 24,
+
+                                fontSize: 16,
                               ),
                             ),
-                            const Icon(Icons.expand_more, color: Colors.black),
+                            const Icon(Icons.expand_more, color: Colors.black, size: 16,),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    '${widget.product.description.price.truncate().toString()} руб/ч',
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontFamily: 'PoiretOne',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
+
                   const SizedBox(
                     height: 10,
                   )
@@ -225,7 +226,7 @@ class _OrderProductCardState extends State<OrderProductCard> {
                           },
                           child: const Text("Изменить размер",
                               style: TextStyle(
-                                fontFamily: 'PoiretOne',
+
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ))),

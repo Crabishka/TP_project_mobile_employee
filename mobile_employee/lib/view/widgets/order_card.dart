@@ -25,7 +25,7 @@ class OrderCard extends StatelessWidget {
                   "Номер телефона: ${order.phoneNumber}",
                   textAlign: TextAlign.left,
                   style: const TextStyle(
-                    fontFamily: 'PoiretOne',
+
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -36,7 +36,7 @@ class OrderCard extends StatelessWidget {
                   "Имя: ${order.name}",
                   textAlign: TextAlign.left,
                   style: const TextStyle(
-                    fontFamily: 'PoiretOne',
+
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -47,7 +47,7 @@ class OrderCard extends StatelessWidget {
                     "Дата: ${DateFormat('dd-MMM').format(order.order.date)}",
                     textAlign: TextAlign.left,
                     style: const TextStyle(
-                      fontFamily: 'PoiretOne',
+
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ))),
@@ -56,7 +56,7 @@ class OrderCard extends StatelessWidget {
                 child: Text(order.order.status.getStatusText(),
                     textAlign: TextAlign.left,
                     style: const TextStyle(
-                      fontFamily: 'PoiretOne',
+
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ))),

@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       product.title,
                       style: const TextStyle(
-                        fontFamily: 'PoiretOne',
+
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
                       ),
@@ -49,14 +49,13 @@ class ProductCard extends StatelessWidget {
                       product.description,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontFamily: 'PoiretOne',
+
                         fontSize: 16,
                       ),
                     ),
                     Text(
                       '${product.price} руб./час',
                       style: const TextStyle(
-                        fontFamily: 'PoiretOne',
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),

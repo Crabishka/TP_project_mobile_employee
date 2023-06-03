@@ -42,12 +42,12 @@ class ProductLittleCard extends StatelessWidget {
                         flex: 7,
                         child: Text(
                           product.description.title,
-                          maxLines: 1,
+                          maxLines: 2,
                           style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             overflow: TextOverflow.ellipsis,
                             fontWeight: FontWeight.bold,
-                            fontSize: 24,
+                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -61,8 +61,8 @@ class ProductLittleCard extends StatelessWidget {
                         'Размер: ${product.size}',
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontFamily: 'PoiretOne',
-                          fontSize: 24,
+
+                          fontSize: 16,
                         ),
                       ),
                     ],

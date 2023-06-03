@@ -35,7 +35,7 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
             child: const Text(
               "Домой",
               style: TextStyle(
-                  fontFamily: 'PoiretOne',
+
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
@@ -62,7 +62,7 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
                     child: Text(
                       "Заказ клиента № ${widget.orderDTO.order.id}",
                       style: const TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 32),
                     ),
@@ -90,33 +90,33 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
                           "Заказ от ${DateFormat('dd-MMM').format(widget.orderDTO.order.date)} числа",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                         Text(
                           "Имя: ${widget.orderDTO.name}",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                         Text(
                           "Телефон: ${widget.orderDTO.phoneNumber}",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                         Text(
                           "Сумма: ${widget.orderDTO.order.sum.truncate().toString()} руб/час",
                           style: const TextStyle(
                             color: Color(0xAA000000),
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
-                            fontSize: 24,
+                            fontSize: 20,
                           ),
                         ),
                         CountdownTimerWidget(
@@ -132,7 +132,7 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
                       childCount: widget.orderDTO.order.products.length,
                       (context, index) {
                     return Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                         child: OrderProductCard(
                             product: widget.orderDTO.order.products[index],
                             order: widget.orderDTO.order));
@@ -163,7 +163,7 @@ class _FittingOrderPageState extends State<FittingOrderPage> {
               },
               child: const Text("Отменить",
                   style: TextStyle(
-                    fontFamily: 'PoiretOne',
+
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   )),
@@ -214,8 +214,8 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget> {
       "Время на примерку ${remainingTime.inMinutes.toString().padLeft(2, '0')}:${(remainingTime.inSeconds % 60).toString().padLeft(2, '0')}",
       style: const TextStyle(
         color: Color(0xAA000000),
-        fontFamily: 'PoiretOne',
-        fontSize: 24,
+
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     );

@@ -42,7 +42,7 @@ class _QrPaymentPageState extends State<QrPaymentPage> {
                       child: Text(
                         "Заказ клиента № ${widget.orderDTO.order.id}",
                         style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 32),
                       ),
@@ -139,7 +139,7 @@ class _QrPaymentPageState extends State<QrPaymentPage> {
                         onPressed: ifFinished() ? finish() : makePayment(),
                         child: Text(ifFinished() ? "Домой" : "Оплачено",
                             style: const TextStyle(
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                             )),

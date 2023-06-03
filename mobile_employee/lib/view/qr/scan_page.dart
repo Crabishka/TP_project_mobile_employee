@@ -84,10 +84,10 @@ class _ScanPageState extends State<ScanPage> {
                       ? " Номер заказа ${barcode!.code} "
                       : " Отсканируете заказ клиента ",
                   style: const TextStyle(
-                      fontFamily: 'PoiretOne',
+
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24)),
+                      fontSize: 20)),
             )),
         const SizedBox(
           height: 8,
@@ -110,10 +110,10 @@ class _ScanPageState extends State<ScanPage> {
                   padding: EdgeInsets.all(4.0),
                   child: Text(" Перейти ",
                       style: TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24)),
+                          fontSize: 20)),
                 )),
           )
       ],

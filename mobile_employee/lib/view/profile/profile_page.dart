@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: const Text(
             "Выйти",
             style: TextStyle(
-                fontFamily: 'PoiretOne',
+
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Center(
                             child: Text("Здравствуйте, ${snapshot.data!.name}",
                                 style: const TextStyle(
-                                  fontFamily: 'PoiretOne',
+
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 )),
@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                           snapshot.data!.phoneNumber,
                           style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -119,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                           "Аккаунт Работника",
                           style: TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),

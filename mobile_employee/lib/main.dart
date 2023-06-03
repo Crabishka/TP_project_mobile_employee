@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Sportique',
       theme: ThemeData(
+        fontFamily: 'Mont',
         primarySwatch: Colors.blue,
       ),
       home: App(),

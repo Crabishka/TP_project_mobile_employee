@@ -45,13 +45,13 @@ class _AuthFormPageState extends State<AuthFormPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20,
-                    fontFamily: 'PoiretOne',
+
                     fontWeight: FontWeight.bold),
               ),
               const Text(
                 "Войдите или зарегистрируйтесь, чтобы продолжить",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, fontFamily: 'PoiretOne'),
+                style: TextStyle(fontSize: 16, ),
               ),
               Form(
                   key: _formKey,
@@ -68,7 +68,7 @@ class _AuthFormPageState extends State<AuthFormPage> {
                             decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.phone_iphone_sharp),
                                 labelStyle: TextStyle(
-                                    fontFamily: 'PoiretOne',
+
                                     color: const Color(0xFF3EB489),
                                     fontSize: 20),
                                 labelText: 'Номер Телефона',
@@ -113,7 +113,7 @@ class _AuthFormPageState extends State<AuthFormPage> {
                                     },
                                     icon: Icon(Icons.remove_red_eye_outlined)),
                                 labelStyle: const TextStyle(
-                                    fontFamily: 'PoiretOne',
+
                                     color: Color(0xFF3EB489),
                                     fontSize: 20),
                                 labelText: 'Пароль',
@@ -174,7 +174,7 @@ class _AuthFormPageState extends State<AuthFormPage> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 24,
-                                      fontFamily: 'PoiretOne',
+
                                     ),
                                   ),
                                 ),

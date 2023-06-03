@@ -42,7 +42,7 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
                     child: Text(
                       "Заказ клиента № ${widget.orderDTO.order.id}",
                       style: const TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 32),
                     ),
@@ -67,28 +67,28 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Заказ от ${DateFormat('dd-MMM').format(widget.orderDTO.order.date)} числа",
+                          "Заказ от ${DateFormat('dd-MM').format(widget.orderDTO.order.date)} числа",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                         Text(
                           "Имя: ${widget.orderDTO.name}",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                         Text(
                           "Телефон: ${widget.orderDTO.phoneNumber}",
                           style: const TextStyle(
                               color: Color(0xAA000000),
-                              fontFamily: 'PoiretOne',
+
                               fontWeight: FontWeight.bold,
-                              fontSize: 24),
+                              fontSize: 20),
                         ),
                       ],
                     ),
@@ -125,9 +125,10 @@ class _WaitingOrderPageState extends State<WaitingOrderPage> {
                   : null,
               child: Text(
                   isToday() ? "Подтвердить" : "Заказ не на сегодняшную дату :(",
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontFamily: 'PoiretOne',
+
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   )),

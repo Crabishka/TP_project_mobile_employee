@@ -42,7 +42,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                   child: Text(
                     "Заказ клиента № ${widget.orderDTO.order.id}",
                     style: const TextStyle(
-                        fontFamily: 'PoiretOne',
+
                         fontWeight: FontWeight.bold,
                         fontSize: 32),
                   ),
@@ -69,21 +69,21 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                       Text(
                         "Заказ от ${DateFormat('dd-MMM').format(widget.orderDTO.order.date)} числа",
                         style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),
                       Text(
                         "Имя: ${widget.orderDTO.name}",
                         style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),
                       Text(
                         "Телефон: ${widget.orderDTO.phoneNumber}",
                         style: const TextStyle(
-                            fontFamily: 'PoiretOne',
+
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),
@@ -91,7 +91,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                         "Стоимость: ${widget.orderDTO.order.sum} руб/час",
                         style: const TextStyle(
                           color: Colors.black,
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -100,7 +100,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                         "Время аренды: ${DateTime.now().difference(widget.orderDTO.order.startTime).inHours}:"
                         "${DateTime.now().difference(widget.orderDTO.order.startTime).inMinutes % 60}",
                         style: const TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -108,7 +108,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                       Text(
                         "Итого: ${DateTime.now().difference(widget.orderDTO.order.startTime).inMinutes * widget.orderDTO.order.sum ~/ 60} рублей",
                         style: const TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -143,7 +143,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
             },
             child: const Text("Завершить",
                 style: TextStyle(
-                  fontFamily: 'PoiretOne',
+
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 )),

@@ -41,7 +41,7 @@ class _QrPageState extends State<QrPage> {
                     const Text(
                       "Отсканировать",
                       style: TextStyle(
-                          fontFamily: 'PoiretOne',
+
                           fontWeight: FontWeight.bold,
                           fontSize: 26),
                     ),
