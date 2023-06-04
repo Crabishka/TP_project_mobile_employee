@@ -228,7 +228,7 @@ class _OrderProductCardState extends State<OrderProductCard> {
                               style: TextStyle(
 
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 16,
                               ))),
                       const SizedBox(
                         height: 12,
